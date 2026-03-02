@@ -1,7 +1,6 @@
 "use strict";
 
 // IMPORT ASSETS from "src" folder
-
 // Import icons from "src" folder
 const icons = import.meta.glob(`/src/assets/icons/*.svg`, {
   eager: true,
