@@ -13,6 +13,24 @@ const images = import.meta.glob(`/src/assets/images/image-*.jpg`, {
   import: `default`,
 });
 
+// "fetch()" API
+const dataJSON = async () => {
+  try {
+    const response = await fetch(`/data.json`);
+
+    if (!response.ok) {
+      console.log(`Response status: ${response.status}`);
+    }
+
+    const result = await response.json();
+
+    console.log(result);
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+dataJSON();
+
 // VARIABLES & FUNCTIONS
 // Variables
 const emptyCartImg = document.getElementById(`empty-cart-img`);
