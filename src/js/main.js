@@ -1,46 +1,38 @@
 "use strict";
 
-// IMPORT ASSETS from "src" folder
-// Import icons from "src" folder
-const icons = import.meta.glob(`/src/assets/icons/*.svg`, {
-  eager: true,
-  import: `default`,
-});
+// Import the other modules
+import "/src/style.css";
+import "/src/js/cart.js";
+import "/src/js/products.js";
+import "/src/js/modal-window.js";
 
-// Import images from "src" folder
-const images = import.meta.glob(`/src/assets/images/image-*.jpg`, {
-  eager: true,
-  import: `default`,
-});
-
-// "fetch()" API
-const dataJSON = async () => {
+// "fetch()" API to fetch the data from "data.json"
+const productsData = async () => {
   try {
+    // fetch data from the "data.json" file
     const response = await fetch(`/data.json`);
 
+    // Verifying if the request actually succeeded before proceeding
     if (!response.ok) {
-      console.log(`Response status: ${response.status}`);
+      throw new Error(`Failed to load data: ${response.status}`);
     }
 
-    const result = await response.json();
+    // Parse the raw JSON text into a JavaScript Array of product objects
+    const products = await response.json();
 
-    console.log(result);
+    // Inspecting the result that we have received, by using console.log()
+    console.log(`Products loaded:`, products);
+
+    // Initialize Cart Event Listeners before rendering anything on the page
+    // initCart();
+
+    // Render all product cards into the DOM
+    renderProducts(products);
   } catch (error) {
-    console.error(error.message);
+    // Show a user-friendly error message in the UI, during the production
+    console.error(`App initialization failed:`, error);
   }
 };
-dataJSON();
 
-// VARIABLES & FUNCTIONS
-// Variables
-const emptyCartImg = document.getElementById(`empty-cart-img`);
-const confModalIcon = document.getElementById(`icon-order-confirmed`);
-
-// Functions
-
-// APPLICATION
-// Cart Section
-emptyCartImg.src = icons[`/src/assets/icons/illustration-empty-cart.svg`];
-
-// Confirmation Modal Window
-confModalIcon.src = icons[`/src/assets/icons/icon-order-confirmed.svg`];
+// Call the function
+productsData();

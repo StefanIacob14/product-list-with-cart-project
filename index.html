@@ -11,7 +11,7 @@
   </head>
 
   <body
-    class="relative flex flex-col gap-10 px-5 py-6 h-dvh w-dvw font-redhat bg-rose-50 overflow-hidden"
+    class="relative flex flex-col gap-10 px-5 py-6 h-dvh w-dvw font-redhat bg-rose-50"
   >
     <!-- HEADER -->
     <header>
@@ -20,21 +20,56 @@
 
     <!-- MAIN -->
     <main>
-      <!-- Product List -->
-      <section></section>
+      <!-- Product Grid List -->
+      <section
+        id="product-grid"
+        class="grid grid-cols-1 gap-5 flex-1"
+      ></section>
 
       <!-- Cart -->
-      <article
+      <aside
         class="flex flex-col gap-6 items-center justify-center size-full bg-white rounded-xl px-5 pt-6 pb-10"
       >
-        <h2 class="font-bold self-start text-2xl text-rose-800">
-          Your Cart (<span>0</span>)
-        </h2>
-        <img id="empty-cart-img" alt="Cart Default Image" />
-        <p class="font-semibold text-[0.8rem] text-rose-950 opacity-60">
-          Your added items will appear here
-        </p>
-      </article>
+        <!-- Cart Header -->
+        <header class="self-start">
+          <h2 class="font-bold text-2xl text-rose-800">
+            Your Cart (<span>0</span>)
+          </h2>
+        </header>
+
+        <!-- Cart Selected Items Unordered List (where JS will inject the list items) -->
+        <main>
+          <ul id="cart-items" class="mt-5 divide-y divide-rose-100"></ul>
+        </main>
+
+        <!-- Cart Footer (with Total + Confirmation Button) -->
+        <footer id="cart-footer" class="size-full mt-5 flex flex-col gap-8">
+          <!-- Cart Footer Total -->
+          <div class="flex items-center justify-between">
+            <p class="text-[0.9rem]">Order Total</p>
+            <p id="cart-total" class="font-bold text-2xl">$0.00</p>
+          </div>
+
+          <!-- Cart Footer message -->
+          <div
+            class="flex gap-2 items-center self-center bg-rose-50 px-7 py-3 rounded-xl"
+          >
+            <img id="carbon-neutral-icon" alt="carbon-neutral" />
+            <p class="text-[0.9rem]">
+              This is a
+              <span class="font-semibold">carbon-neutral</span> delivery
+            </p>
+          </div>
+
+          <!-- Cart Footer Confirmation Button -->
+          <button
+            id="cart-confirm-button"
+            class="bg-red-800/90 text-white font-semibold text-[0.91rem] rounded-full py-3"
+          >
+            Confirm Order
+          </button>
+        </footer>
+      </aside>
     </main>
 
     <!-- Overlay -->
@@ -45,6 +80,7 @@
 
     <!-- Confirmation Modal Window -->
     <section
+      id="modal-window"
       class="invisible absolute z-20 bottom-0 left-0 bg-white w-dvw h-[88dvh] rounded-t-xl px-5 py-6 flex flex-col items-center justify-between gap-1"
     >
       <header class="flex flex-col items-center gap-4">
@@ -63,7 +99,8 @@
 
       <footer>
         <button
-          class="bg-red-800/90 text-white text-[0.91rem] py-3 px-28.5 rounded-full"
+          id="start-new-order-button"
+          class="bg-red-800/90 text-white font-semibold text-[0.91rem] py-3 px-27.5 rounded-full"
         >
           Start New Order
         </button>
