@@ -2,22 +2,9 @@
 
 // Import the other modules
 import { images } from "/src/js/assets.js";
-import "/src/js/cart.js";
-
-// Loop through the "products" Array and render a card for each one into the product grid
-export const renderProducts = (products) => {
-  // Grid element from the application
-  const productsGrid = document.getElementById(`product-grid`);
-
-  // For each product in the Array, create a card and add it to the grid
-  products.forEach((product) => {
-    const card = createProductCard(product);
-    productsGrid.appendChild(card);
-  });
-};
 
 // HTML Card Elements, built with JavaScript
-export const createProductCard = (product) => {
+const createProductCard = (product) => {
   // Using ".createElement()" and ".innerHTML" for creating an HTML Element in the DOM
   const article = document.createElement(`article`);
   article.className = `flex flex-col`;
@@ -32,7 +19,10 @@ export const createProductCard = (product) => {
       />
 
       <button
-        class="add-to-cart-btn absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 flex items-center gap-2 bg-white border-2 border-red-600 text-sm font-semibold px-5 py-2 rounded-full hover:text-red-600 transition-colors whitespace-nowrap">
+        class="add-to-cart-btn absolute bottom-0 left-1/2 -translate-x-1/2
+        translate-y-1/2 flex items-center gap-2 bg-white border-2 border-red-600
+        text-sm font-semibold px-5 py-2 rounded-full hover:text-red-600
+        transition-colors whitespace-nowrap">
           Add to Cart
       </button>
     </div>
@@ -57,4 +47,16 @@ export const createProductCard = (product) => {
   // });
 
   return article;
+};
+
+// Loop through the "products" Array and render a card for each one into the product grid
+export const renderProducts = (products) => {
+  // Grid element from the application
+  const productsGrid = document.getElementById(`product-grid`);
+
+  // For each product in the Array, create a card and add it to the grid
+  products.forEach((product) => {
+    const card = createProductCard(product);
+    productsGrid.appendChild(card);
+  });
 };

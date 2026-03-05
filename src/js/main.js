@@ -1,10 +1,19 @@
 "use strict";
 
 // Import the other modules
-import "/src/style.css";
-import "/src/js/cart.js";
-import "/src/js/products.js";
-import "/src/js/modal-window.js";
+import { modalWindowEvent } from "/src/js/modal-window.js";
+import { renderProducts } from "/src/js/products.js";
+import { renderCarbonNeutralIcon } from "/src/js/cart.js";
+
+// Other Modals Functions
+// Initialize Cart Event Listeners before rendering anything on the page
+// initCart();
+
+// Initialize Modal Window Event
+modalWindowEvent();
+
+// Render Cart carbon-neutral icon
+renderCarbonNeutralIcon();
 
 // "fetch()" API to fetch the data from "data.json"
 const productsData = async () => {
@@ -22,9 +31,6 @@ const productsData = async () => {
 
     // Inspecting the result that we have received, by using console.log()
     console.log(`Products loaded:`, products);
-
-    // Initialize Cart Event Listeners before rendering anything on the page
-    // initCart();
 
     // Render all product cards into the DOM
     renderProducts(products);

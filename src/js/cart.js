@@ -8,5 +8,3 @@ export const renderCarbonNeutralIcon = () => {
     element.src = icons[`/src/assets/icons/icon-carbon-neutral.svg`];
   }
 };
-
-renderCarbonNeutralIcon();
