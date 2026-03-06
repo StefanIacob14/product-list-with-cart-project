@@ -1,16 +1,13 @@
 "use strict";
 
 // Import the other modules
-import { modalWindowEvent } from "/src/js/modal-window.js";
 import { renderProducts } from "/src/js/products.js";
 import { renderCarbonNeutralIcon } from "/src/js/cart.js";
+import { initCart } from "/src/js/cart.js";
 
 // Other Modals Functions
 // Initialize Cart Event Listeners before rendering anything on the page
-// initCart();
-
-// Initialize Modal Window Event
-modalWindowEvent();
+initCart();
 
 // Render Cart carbon-neutral icon
 renderCarbonNeutralIcon();

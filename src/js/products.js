@@ -1,7 +1,8 @@
 "use strict";
 
 // Import the other modules
-import { images } from "/src/js/assets.js";
+import { icons } from "/src/js/assets.js";
+import { addToCart } from "/src/js/cart.js";
 
 // HTML Card Elements, built with JavaScript
 const createProductCard = (product) => {
@@ -37,14 +38,14 @@ const createProductCard = (product) => {
   // Event Listener after setting innerHTML
   const addToCartBtn = article.querySelector(`.add-to-cart-btn`);
 
-  // addToCartBtn.addEventListener(`click`, () => {
-  //   addToCart({
-  //     id: product.id,
-  //     name: product.name,
-  //     price: product.price,
-  //     image: product.image.thumbnail,
-  //   });
-  // });
+  addToCartBtn.addEventListener(`click`, () => {
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image.thumbnail,
+    });
+  });
 
   return article;
 };

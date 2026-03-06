@@ -30,7 +30,7 @@
         <!-- Cart Header -->
         <header class="self-start">
           <h2 class="font-bold text-2xl text-rose-800">
-            Your Cart (<span>0</span>)
+            Your Cart (<span id="cart-count">0</span>)
           </h2>
         </header>
 
@@ -95,7 +95,12 @@
           </p>
         </header>
 
-        <main class="bg-rose-100 h-[45dvh] w-[90dvw] rounded-xl"></main>
+        <ul id="modal-items" class="mt-6 divide-y divide-rose-100"></ul>
+
+        <div class="flex justify-between font-semibold text-lg py-4">
+          <span>Order Total</span>
+          <span id="modal-total">0.00$</span>
+        </div>
 
         <footer>
           <button
