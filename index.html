@@ -36,35 +36,40 @@
 
         <!-- Cart Selected Items Unordered List (where JS will inject the list items) -->
         <main>
-          <ul id="cart-items" class="mt-5 divide-y divide-rose-100"></ul>
+          <ul
+            id="cart-items"
+            class="w-full mt-5 divide-y divide-rose-100 flex flex-col justify-start"
+          ></ul>
         </main>
 
         <!-- Cart Footer (with Total + Confirmation Button) -->
-        <footer id="cart-footer" class="size-full mt-5 flex flex-col gap-8">
-          <!-- Cart Footer Total -->
-          <div class="flex items-center justify-between">
-            <p class="text-[0.9rem]">Order Total</p>
-            <p id="cart-total" class="font-bold text-2xl">$0.00</p>
-          </div>
+        <footer id="cart-footer" class="hidden size-full mt-5">
+          <div class="flex flex-col gap-8">
+            <!-- Cart Footer Total -->
+            <div class="flex items-center justify-between">
+              <p class="text-[0.9rem]">Order Total</p>
+              <p id="cart-total" class="font-bold text-2xl">$0.00</p>
+            </div>
 
-          <!-- Cart Footer message -->
-          <div
-            class="flex gap-2 items-center self-center bg-rose-50 px-7 py-3 rounded-xl"
-          >
-            <img id="carbon-neutral-icon" alt="carbon-neutral" />
-            <p class="text-[0.9rem]">
-              This is a
-              <span class="font-semibold">carbon-neutral</span> delivery
-            </p>
-          </div>
+            <!-- Cart Footer message -->
+            <div
+              class="flex gap-2 items-center self-center bg-rose-50 px-7 py-3 rounded-xl"
+            >
+              <img id="carbon-neutral-icon" alt="carbon-neutral" />
+              <p class="text-[0.9rem]">
+                This is a
+                <span class="font-semibold">carbon-neutral</span> delivery
+              </p>
+            </div>
 
-          <!-- Cart Footer Confirmation Button -->
-          <button
-            id="cart-confirm-button"
-            class="bg-red-800/90 text-white font-semibold text-[0.91rem] rounded-full py-3"
-          >
-            Confirm Order
-          </button>
+            <!-- Cart Footer Confirmation Button -->
+            <button
+              id="cart-confirm-button"
+              class="bg-red-800/90 text-white font-semibold text-[0.91rem] rounded-full py-3"
+            >
+              Confirm Order
+            </button>
+          </div>
         </footer>
       </aside>
     </main>

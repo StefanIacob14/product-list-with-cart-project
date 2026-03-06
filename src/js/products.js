@@ -1,7 +1,7 @@
 "use strict";
 
 // Import the other modules
-import { icons } from "/src/js/assets.js";
+import { images } from "/src/js/assets.js";
 import { addToCart } from "/src/js/cart.js";
 
 // HTML Card Elements, built with JavaScript
@@ -14,7 +14,7 @@ const createProductCard = (product) => {
   article.innerHTML = `
     <div class="relative rounded-xl overflow-hidden">
       <img
-        src="${product.image.mobile}"
+        src="${images[product.image.mobile]}"
         alt="${product.name}"
         class="size-full"
       />
@@ -31,7 +31,7 @@ const createProductCard = (product) => {
     <div class="mt-8 pt-2">
       <p class="text-sm text-gray-400">${product.category}</p>
       <h3 class="font-semibold text-gray-800">${product.name}</h3>
-      <p class="text-red-600 font-bold mt-1">${product.price}</p>
+      <p class="text-red-600 font-bold mt-1">$${product.price.toFixed(2)}</p>
     </div>
   `;
 
@@ -43,7 +43,7 @@ const createProductCard = (product) => {
       id: product.id,
       name: product.name,
       price: product.price,
-      image: product.image.thumbnail,
+      image: images[product.image.thumbnail],
     });
   });
 

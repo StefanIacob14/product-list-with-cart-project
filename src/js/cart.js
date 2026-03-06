@@ -1,8 +1,8 @@
 "use strict";
 
 // Import the other modules
-import { icons } from "/src/js/assets.js";
-import { modalWindowEvent } from "/src/js/modal-window.js";
+import { icons, images } from "/src/js/assets.js";
+import { modalWindowState } from "/src/js/modal-window.js";
 
 // Render the carbon-neutral icon
 export const renderCarbonNeutralIcon = () => {
@@ -45,8 +45,14 @@ const renderCart = () => {
 
   // Rebuild the Cart items list
   if (cartState.items.length === 0) {
+    cartItemsEl.className = `justify-center`;
     cartItemsEl.innerHTML = `
-      <li class="text-center text-gray-400 py-8">
+      <img
+        src="${icons[`/src/assets/icons/illustration-empty-cart.svg`]}"
+        alt="Empty Cart"
+        class="justify-self-center"
+      />
+      <li class="text-center text-[0.9rem] text-gray-400 py-8">
         Your added items will appear here
       </li>
     `;
@@ -56,19 +62,24 @@ const renderCart = () => {
     cartItemsEl.innerHTML = cartState.items
       .map(
         (item) => `
-      <li class="flex items-center justify-between py-3">
+      <li class="flex items-center justify-between gap-5 py-3">
+        <img
+          src="${images[item.image]}"
+          alt="${item.name}"
+          class="size-14 rounded-xl"
+        />
         <div>
           <p class="font-semibold text-sm">${item.name}</p>
           <p class="text-sm text-gray-400 mt-1">
-            <span class="text-red-600 font-bold">${item.guantity}x</span>
-            <span class="mx-2">${item.price.toFixed(2)}$</span>
+            <span class="text-red-600 font-bold">${item.quantity}x</span>
+            <span class="mx-2">$${item.price.toFixed(2)}</span>
             <span class="font-semibold text-gray-700">
-              ${(item.price * item.quantity).toFixed(2)}$
+              $${(item.price * item.quantity).toFixed(2)}
             </span>
           </p>
         </div>
         <button class="remove-btn w-5 h-5 rounded-full border-2 border-gray-400
-        text-gray-400 hover:border-red-600 hover:text-red-600 flex items-center
+        text-gray-400 hover:border-red-600 hover:text-red-600 flex items-start
         justify-center text-xs font-bold transition-colors" data-id="${item.id}"
         aria-label="Remove ${item.name}">x</button>
       </li>`,
@@ -82,7 +93,7 @@ const renderCart = () => {
   }
 
   // Render the cart total price
-  cartTotalEl.textContent = `${totalPrice.toFixed(2)}$`;
+  cartTotalEl.textContent = `$${totalPrice.toFixed(2)}`;
 };
 
 // Populates and display the Confirmation Modal, when user use the "confirm Order" button
@@ -106,7 +117,7 @@ const modalWindow = () => {
       (item) => `
     <li class="flex items-center gap-4 py-3">
       <img
-        src="${item.image}"
+        src="${images[item.image]}"
         alt="${item.name}"
         class="w-12 h-12 rounded-md object-cover"
       />
@@ -117,16 +128,16 @@ const modalWindow = () => {
           <span class="ml-2">${item.price.toFixed(2)}$</span>
         </p>
       </div>
-      <p class="font-bold">${(item.price * item.quantity).toFixed(2)}$</p>
+      <p class="font-bold">$${(item.price * item.quantity).toFixed(2)}</p>
     </li>`,
     )
     .join("");
 
   // Display Modal Window total price
-  modalTotalEl.textContent = `${totalPrice.toFixed(2)}$`;
+  modalTotalEl.textContent = `$${totalPrice.toFixed(2)}`;
 
   // Render Modal Window
-  modalWindowEvent();
+  modalWindowState();
 };
 
 // Reset the application to its initial state
@@ -138,7 +149,7 @@ const resetOrder = () => {
   renderCart();
 
   // Hide the Modal Window
-  modalWindowEvent();
+  modalWindowState();
 };
 
 // GENERAL FUNCTIONS (functions used by the other modules)
@@ -176,7 +187,9 @@ export const addToCart = (product) => {
 // Function to remove a product from the Cart
 export const removeFromCart = (productId) => {
   // Using "filter()" to return a new Array, without the removed item
-  cartState.items = cartState.items.filter((item) => item.id !== productId);
+  cartState.items = cartState.items.filter(
+    (item) => item.id !== Number(productId),
+  );
 
   // Cart State has changed - rebuild the Cart UI
   renderCart();

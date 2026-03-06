@@ -2,8 +2,7 @@
 
 // Import the other modules
 import { renderProducts } from "/src/js/products.js";
-import { renderCarbonNeutralIcon } from "/src/js/cart.js";
-import { initCart } from "/src/js/cart.js";
+import { renderCarbonNeutralIcon, initCart } from "/src/js/cart.js";
 
 // Other Modals Functions
 // Initialize Cart Event Listeners before rendering anything on the page
