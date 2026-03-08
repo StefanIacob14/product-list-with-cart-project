@@ -38,6 +38,7 @@ const createProductCard = (product) => {
   // Add "Add to Cart" button's Event Listener, after setting innerHTML
   const addToCartBtn = article.querySelector(`.add-to-cart-btn`);
 
+  // !To try the ".forEach()" method and see if it works!
   addToCartBtn.addEventListener(`click`, () => {
     addToCart({
       id: product.id,
