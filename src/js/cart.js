@@ -12,40 +12,48 @@ export const renderCarbonNeutralIcon = () => {
   }
 };
 
-// THE CART STATE - rule: always update this object first, then re-render the UI
+// THE CART STATE - variable where we will input our Cart Element DATA
 // NEVER manipulate the DOM without going through state first
 const cartState = {
   items: [], // Array of: { id, name, price, quantity, image }
 };
 
-// PRIVATE FUNCTIONS (functions used by the cart element)
-// Function to rebuild the entire Cart UI, based on the "cartState" object
+// Function to delete a product from the Cart Element
+export const removeFromCart = (productId) => {
+  // ".filter()" Array method returns a new Array, with products that have passed
+  cartState.items = cartState.items.filter(
+    (item) => item.id !== Number(productId),
+  );
+
+  // "cartState" has changed, so render the Cart Element again
+  renderCart();
+};
+
+// Dynamically update the Cart UI, based on the "cartState" object
 const renderCart = () => {
-  // Select the Cart elements
+  // Select the Cart elements from the application ("index.html")
   const cartItemsEl = document.getElementById(`cart-items`);
   const cartCountEl = document.getElementById(`cart-count`);
   const cartFooterEl = document.getElementById(`cart-footer`);
   const cartTotalEl = document.getElementById(`cart-total`);
 
-  // Derive values from state - never store these separately
+  // Create the "totalItems" variable and use the ".reduce()" Array method to calculate the products number in the "items" Array
   const totalItems = cartState.items.reduce(
     (sum, item) => sum + item.quantity,
     0,
   );
-  const totalPrice = cartState.items.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0,
-  );
 
-  // Update the item count in the Cart Heading
+  // Update the "cartCountEl" variable in the Cart Heading UI
   cartCountEl.textContent = totalItems;
 
-  // Toggle the order total + confirm button
+  // Toggle the Order Total + Confirm Button Cart UI elements, if the "items" Array doesn't have a product
+  // the second parameter ("cartState.items.length === 0") shows whether the "hidden" should be included in the "index.html"
   cartFooterEl.classList.toggle(`hidden`, cartState.items.length === 0);
 
-  // Rebuild the Cart items list
+  // Dynamically Populate the "cartItemsEl" variable
   if (cartState.items.length === 0) {
-    cartItemsEl.className = `justify-center`;
+    // If the "items" Array doesn't have any product, Cart UI will show just an image and a message
+    cartItemsEl.className = `justify-self-center`;
     cartItemsEl.innerHTML = `
       <img
         src="${icons[`/src/assets/icons/illustration-empty-cart.svg`]}"
@@ -57,8 +65,9 @@ const renderCart = () => {
       </li>
     `;
   } else {
-    // Using ".map()" method to transform each Cart item into an HTML string
-    // Using ".join('')" method to merge the Array into one single string
+    // If the "items" Array has a product, or "cartState.items.length === 0" is false, then the products should RENDER inside the Cart element
+    // Using the ".map()" Array method to transform each Cart item into an HTML string
+    // Using the ".join('')" Array method to merge the Array into one single string
     cartItemsEl.innerHTML = cartState.items
       .map(
         (item) => `
@@ -92,7 +101,13 @@ const renderCart = () => {
     });
   }
 
-  // Render the cart total price
+  // Create the "totalPrice" variable and use the ".reduce()" Array method to calculate the total price of the products in the "items" Array
+  const totalPrice = cartState.items.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0,
+  );
+
+  // Update the "cartTotalEl" variable and render the Cart Element total price
   cartTotalEl.textContent = `$${totalPrice.toFixed(2)}`;
 };
 
@@ -179,17 +194,6 @@ export const addToCart = (product) => {
     // If it's a New Item - add it to the array with a starting quantity of 1, using The Spread Operator
     cartState.items.push({ ...product, quantity: 1 });
   }
-
-  // Cart State has changed - rebuild the Cart UI
-  renderCart();
-};
-
-// Function to remove a product from the Cart
-export const removeFromCart = (productId) => {
-  // Using "filter()" to return a new Array, without the removed item
-  cartState.items = cartState.items.filter(
-    (item) => item.id !== Number(productId),
-  );
 
   // Cart State has changed - rebuild the Cart UI
   renderCart();

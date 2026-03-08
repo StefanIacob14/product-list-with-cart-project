@@ -4,7 +4,7 @@
 import { images } from "/src/js/assets.js";
 import { addToCart } from "/src/js/cart.js";
 
-// HTML Card Elements, built with JavaScript
+// Create HTML Card Elements, with JavaScript
 const createProductCard = (product) => {
   // Using ".createElement()" and ".innerHTML" for creating an HTML Element in the DOM
   const article = document.createElement(`article`);
@@ -12,7 +12,7 @@ const createProductCard = (product) => {
 
   // Using ".innerHTML" with template literals for writing strings cleanly
   article.innerHTML = `
-    <div class="relative rounded-xl overflow-hidden">
+    <div class="relative rounded-xl">
       <img
         src="${images[product.image.mobile]}"
         alt="${product.name}"
@@ -35,7 +35,7 @@ const createProductCard = (product) => {
     </div>
   `;
 
-  // Event Listener after setting innerHTML
+  // Add "Add to Cart" button's Event Listener, after setting innerHTML
   const addToCartBtn = article.querySelector(`.add-to-cart-btn`);
 
   addToCartBtn.addEventListener(`click`, () => {
@@ -50,14 +50,17 @@ const createProductCard = (product) => {
   return article;
 };
 
-// Loop through the "products" Array and render a card for each one into the product grid
+// Loop through the "products" Array and RENDER a card for each one into the Product Grid
 export const renderProducts = (products) => {
-  // Grid element from the application
+  // Select the Grid Element from the application("index.html")
   const productsGrid = document.getElementById(`product-grid`);
 
   // For each product in the Array, create a card and add it to the grid
   products.forEach((product) => {
+    // Create a variable for the "createProductCard" function
     const card = createProductCard(product);
+
+    // Input the Card Elements ("card") into the application grid element ("productsGrid"), using ".appendChild()" method
     productsGrid.appendChild(card);
   });
 };

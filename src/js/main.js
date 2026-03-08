@@ -1,10 +1,10 @@
 "use strict";
 
 // Import the other modules
-import { renderProducts } from "/src/js/products.js";
 import { renderCarbonNeutralIcon, initCart } from "/src/js/cart.js";
+import { renderProducts } from "/src/js/products.js";
 
-// Other Modals Functions
+// Other Modules Functions
 // Initialize Cart Event Listeners before rendering anything on the page
 initCart();
 
@@ -12,7 +12,7 @@ initCart();
 renderCarbonNeutralIcon();
 
 // "fetch()" API to fetch the data from "data.json"
-const productsData = async () => {
+const initData = async () => {
   try {
     // fetch data from the "data.json" file
     const response = await fetch(`/data.json`);
@@ -37,4 +37,4 @@ const productsData = async () => {
 };
 
 // Call the function
-productsData();
+initData();
