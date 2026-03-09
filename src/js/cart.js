@@ -2,7 +2,7 @@
 
 // Import the other modules
 import { icons, images } from "/src/js/assets.js";
-import { modalWindowState } from "/src/js/modal-window.js";
+import { modalWindow } from "/src/js/modal-window.js";
 
 // Render the carbon-neutral icon
 export const renderCarbonNeutralIcon = () => {
@@ -14,23 +14,12 @@ export const renderCarbonNeutralIcon = () => {
 
 // THE CART STATE - variable where we will input our Cart Element DATA
 // NEVER manipulate the DOM without going through state first
-const cartState = {
+export const cartState = {
   items: [], // Array of: { id, name, price, quantity, image }
 };
 
-// Function to delete a product from the Cart Element
-export const removeFromCart = (productId) => {
-  // ".filter()" Array method returns a new Array, with products that have passed
-  cartState.items = cartState.items.filter(
-    (item) => item.id !== Number(productId),
-  );
-
-  // "cartState" has changed, so render the Cart Element again
-  renderCart();
-};
-
 // Dynamically update the Cart UI, based on the "cartState" object
-const renderCart = () => {
+export const renderCart = () => {
   // Select the Cart elements from the application ("index.html")
   const cartItemsEl = document.getElementById(`cart-items`);
   const cartCountEl = document.getElementById(`cart-count`);
@@ -47,7 +36,7 @@ const renderCart = () => {
   cartCountEl.textContent = totalItems;
 
   // Toggle the Order Total + Confirm Button Cart UI elements, if the "items" Array doesn't have a product
-  // the second parameter ("cartState.items.length === 0") shows whether the "hidden" should be included in the "index.html"
+  // the second parameter ("cartState.items.length === 0") shows whether the "hidden" property should be included in the "index.html"
   cartFooterEl.classList.toggle(`hidden`, cartState.items.length === 0);
 
   // Dynamically Populate the "cartItemsEl" variable
@@ -71,7 +60,7 @@ const renderCart = () => {
     cartItemsEl.innerHTML = cartState.items
       .map(
         (item) => `
-      <li class="flex items-center justify-between gap-5 py-3">
+      <li class="flex items-center justify-between gap-5 py-3 border-b-2 border-b-red-100/70">
         <img
           src="${images[item.image]}"
           alt="${item.name}"
@@ -111,82 +100,23 @@ const renderCart = () => {
   cartTotalEl.textContent = `$${totalPrice.toFixed(2)}`;
 };
 
-// Populates and display the Confirmation Modal, when user use the "confirm Order" button
-const modalWindow = () => {
-  // If the Cart is empty, don't show Modal Window
-  if (cartState.items.length === 0) return;
-
-  // Selecting Modal Window elements
-  const modalOverlay = document.getElementById(`overlay`);
-  const modalItemsEl = document.getElementById(`modal-items`);
-  const modalTotalEl = document.getElementById(`modal-total`);
-
-  const totalPrice = cartState.items.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0,
-  );
-
-  // Build the order summary list inside the Modal Window
-  modalItemsEl.innerHTML = cartState.items
-    .map(
-      (item) => `
-    <li class="flex items-center gap-4 py-3">
-      <img
-        src="${images[item.image]}"
-        alt="${item.name}"
-        class="w-12 h-12 rounded-md object-cover"
-      />
-      <div class="flex-1">
-        <p class="font-semibold text-sm">${item.name}</p>
-        <p class="text-sm text-gray-400">
-          <span class="text-red-600 font-bold">${item.quantity}x</span>
-          <span class="ml-2">${item.price.toFixed(2)}$</span>
-        </p>
-      </div>
-      <p class="font-bold">$${(item.price * item.quantity).toFixed(2)}</p>
-    </li>`,
-    )
-    .join("");
-
-  // Display Modal Window total price
-  modalTotalEl.textContent = `$${totalPrice.toFixed(2)}`;
-
-  // Render Modal Window
-  modalWindowState();
-};
-
-// Reset the application to its initial state
-const resetOrder = () => {
-  // Clear the "cartState" variable
-  cartState.items = [];
-
-  // Rebuild the empty cart UI
+// Cart Element UI Interactivity
+export const initCart = () => {
+  // Render the initial empty Cart element
   renderCart();
 
-  // Hide the Modal Window
-  modalWindowState();
-};
-
-// GENERAL FUNCTIONS (functions used by the other modules)
-// Cart element related Event Listeners
-export const initCart = () => {
-  // Add the Cart element Event Listeners (appear and disappear)
+  // Cart element "Confirm Order" button's Event Listener
   document
     .getElementById(`cart-confirm-button`)
     .addEventListener(`click`, modalWindow);
-  document
-    .getElementById(`start-new-order-button`)
-    .addEventListener(`click`, resetOrder);
-
-  // Render the initial empty cart state
-  renderCart();
 };
 
 // Function to add a product to the Cart, or increments its quantity if already present
 export const addToCart = (product) => {
-  // Checking if the product is already in the Cart
+  // Checking if the product is already in the Cart, using the ".find()" Array method for REFERENCE
   const existingItem = cartState.items.find((item) => item.id === product.id);
 
+  // Implement the "addToCart" function logic
   if (existingItem) {
     // If it's already in the Cart - increase the quantity
     existingItem.quantity += 1;
@@ -196,5 +126,28 @@ export const addToCart = (product) => {
   }
 
   // Cart State has changed - rebuild the Cart UI
+  renderCart();
+};
+
+// Function to delete a product from the Cart Element
+export const removeFromCart = (productId) => {
+  // Checking if the product is in the Cart, using ".find()" Array method for REFERENCE
+  const existingItem = cartState.items.find(
+    (item) => item.id === Number(productId),
+  );
+
+  // Implement "removeFromCart" function logic
+  if (existingItem.quantity > 1) {
+    // If the product is in the Cart more than 1, decrease the quantity by 1
+    existingItem.quantity -= 1;
+  } else {
+    // If the product is in the Cart just once, delete the product
+    // ".filter()" Array method returns a new Array, with products that have passed
+    cartState.items = cartState.items.filter(
+      (item) => item.id !== Number(productId),
+    );
+  }
+
+  // "cartState" has changed, so render the Cart Element again
   renderCart();
 };
