@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/src/style.css" />
 
     <link rel="icon" href="favicon-32x32.png" />
-    <title>Product list project | Frontend Mentor</title>
+    <title>Product list with cart project | Frontend Mentor</title>
   </head>
 
   <body
@@ -29,17 +29,14 @@
       >
         <!-- Cart Header -->
         <header class="self-start">
-          <h2 class="font-bold text-2xl text-rose-800">
+          <h2 class="font-bold text-2xl text-rose-900">
             Your Cart (<span id="cart-count">0</span>)
           </h2>
         </header>
 
         <!-- Cart Selected Items Unordered List (where JS will inject the list items) -->
         <main>
-          <ul
-            id="cart-items"
-            class="w-full mt-5 flex flex-col justify-star"
-          ></ul>
+          <ul id="cart-items" class="w-full flex flex-col"></ul>
         </main>
 
         <!-- Cart Footer (with Total + Confirmation Button) -->
@@ -83,7 +80,7 @@
     <!-- Confirmation Modal Window -->
     <section
       id="modal-window"
-      class="hidden fixed z-20 bottom-0 left-0 bg-white w-dvw h-[88dvh] rounded-t-xl px-5 py-6"
+      class="hidden fixed z-20 bottom-0 left-0 bg-white w-dvw h-[90dvh] rounded-t-xl px-5 py-6"
     >
       <div class="flex flex-col items-center justify-between gap-7">
         <header class="flex flex-col items-center gap-4">
@@ -100,17 +97,19 @@
           </p>
         </header>
 
-        <ul id="modal-items" class="mt-6 divide-y divide-rose-100"></ul>
+        <div class="bg-rose-50 w-[85dvw] p-5 rounded-xl">
+          <ul id="modal-items" class="max-h-[32dvh] overflow-y-scroll"></ul>
 
-        <div class="flex justify-between font-semibold text-lg py-4">
-          <span class="mr-2">Order Total</span>
-          <span id="modal-total">$0.00</span>
+          <div class="flex items-center justify-between font-semibold mt-5">
+            <span class="text-[0.9rem]">Order Total</span>
+            <span id="modal-total" class="text-[1.5rem] font-bold">$0.00</span>
+          </div>
         </div>
 
         <footer>
           <button
             id="start-new-order-button"
-            class="bg-red-800/90 text-white font-semibold text-[0.91rem] py-3 px-27.5 rounded-full"
+            class="bg-red-800/90 text-white font-semibold text-[0.91rem] py-3 px-26.5 rounded-full"
           >
             Start New Order
           </button>

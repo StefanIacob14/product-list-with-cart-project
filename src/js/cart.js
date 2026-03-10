@@ -2,6 +2,7 @@
 
 // Import the other modules
 import { icons, images } from "/src/js/assets.js";
+import { CARD_DEFAULT_BORDER, CARD_ACTIVE_BORDER } from "/src/js/constants.js";
 import { modalWindow } from "/src/js/modal-window.js";
 
 // Render the carbon-neutral icon
@@ -47,9 +48,9 @@ export const renderCart = () => {
       <img
         src="${icons[`/src/assets/icons/illustration-empty-cart.svg`]}"
         alt="Empty Cart"
-        class="justify-self-center"
+        class="justify-self-center mt-5"
       />
-      <li class="text-center text-[0.9rem] text-gray-400 py-8">
+      <li class="text-center text-[0.9rem] text-red-950/50 font-semibold py-5">
         Your added items will appear here
       </li>
     `;
@@ -60,21 +61,23 @@ export const renderCart = () => {
     cartItemsEl.innerHTML = cartState.items
       .map(
         (item) => `
-      <li class="flex items-center justify-between gap-5 py-3 border-b-2 border-b-red-100/70">
-        <img
-          src="${images[item.image]}"
-          alt="${item.name}"
-          class="size-14 rounded-xl"
-        />
-        <div>
-          <p class="font-semibold text-sm">${item.name}</p>
-          <p class="text-sm text-gray-400 mt-1">
-            <span class="text-red-600 font-bold">${item.quantity}x</span>
-            <span class="mx-2">$${item.price.toFixed(2)}</span>
-            <span class="font-semibold text-gray-700">
-              $${(item.price * item.quantity).toFixed(2)}
-            </span>
-          </p>
+      <li class="flex items-center justify-between gap-7 py-3 border-b-2 border-b-red-100/70">
+        <div class="flex gap-5">
+          <img
+            src="${images[item.image]}"
+            alt="${item.name}"
+            class="size-12 rounded-xl"
+          />
+          <div>
+            <p class="font-semibold text-sm">${item.name}</p>
+            <p class="text-sm text-gray-400 mt-1">
+              <span class="text-red-600 font-bold">${item.quantity}x</span>
+              <span class="mx-2">$${item.price.toFixed(2)}</span>
+              <span class="font-semibold text-gray-700">
+                $${(item.price * item.quantity).toFixed(2)}
+              </span>
+            </p>
+          </div>
         </div>
         <button class="remove-btn w-5 h-5 rounded-full border-2 border-gray-400
         text-gray-400 hover:border-red-600 hover:text-red-600 flex items-start
@@ -129,9 +132,30 @@ export const addToCart = (product) => {
   renderCart();
 };
 
+// Function for "removeFromCart", to find a product card by its "data-id" and update its border
+// This is how "cart.js" file communicates with "products.js" file, without using "Import"
+const updateCardBorder = (productId) => {
+  // Find the article element from "product.js" that has "data-id" matching the "productId"
+  const productCard = document.querySelector(`article[data-id="${productId}"]`);
+
+  // If the card doesn't exist, stop here
+  if (!productCard) return;
+
+  // Selecting the card's product image
+  const cardImage = productCard.querySelector(`#product-card-image`);
+
+  // If the image doesn't exist, stop here
+  if (!cardImage) return;
+
+  // Remove the image border if we delete the product from the Cart
+  cardImage.classList.add(CARD_DEFAULT_BORDER);
+  cardImage.classList.remove(CARD_ACTIVE_BORDER);
+};
+
 // Function to delete a product from the Cart Element
 export const removeFromCart = (productId) => {
   // Checking if the product is in the Cart, using ".find()" Array method for REFERENCE
+  // Or, in this case, Selecting the product in the "cartState.items" Array
   const existingItem = cartState.items.find(
     (item) => item.id === Number(productId),
   );
@@ -146,6 +170,9 @@ export const removeFromCart = (productId) => {
     cartState.items = cartState.items.filter(
       (item) => item.id !== Number(productId),
     );
+
+    // "updateCardBorder" function for the product's image border
+    updateCardBorder(Number(productId));
   }
 
   // "cartState" has changed, so render the Cart Element again

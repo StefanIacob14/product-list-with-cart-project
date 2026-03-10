@@ -18,7 +18,7 @@ const modalWindowState = () => {
 };
 
 // Function to reset the application state, after the user confirm its order
-export const resetOrder = () => {
+const resetOrder = () => {
   // Clear the "cartState" variable
   cartState.items = [];
 
@@ -48,7 +48,7 @@ export const modalWindow = () => {
   modalItemsEl.innerHTML = cartState.items
     .map(
       (item) => `
-    <li class="flex items-center gap-4 py-3">
+    <li class="flex items-center gap-4 py-3 border-b-2 border-b-red-100/70">
       <img
         src="${images[item.image]}"
         alt="${item.name}"
@@ -57,8 +57,8 @@ export const modalWindow = () => {
       <div class="flex-1">
         <p class="font-semibold text-sm">${item.name}</p>
         <p class="text-sm text-gray-400">
-          <span class="text-red-600 font-bold">${item.quantity}x</span>
-          <span class="ml-2">$${item.price.toFixed(2)}</span>
+          <span class="text-red-600 font-semibold">${item.quantity}x</span>
+          <span class="ml-6">$${item.price.toFixed(2)}</span>
         </p>
       </div>
       <p class="font-semibold">$${(item.price * item.quantity).toFixed(2)}</p>
