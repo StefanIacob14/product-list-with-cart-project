@@ -152,6 +152,23 @@ const updateCardBorder = (productId) => {
   cardImage.classList.remove(CARD_ACTIVE_BORDER);
 };
 
+// Function for "removeFormCart" to switch between the "Add to Cart" button and the "Quantity Display" button
+const productCardBtnSwitch = (productId) => {
+  // Find the article element from the "product.js" file, based of the "productId"
+  const productCard = document.querySelector(`article[data-id="${productId}"]`);
+
+  // If the product card doesn't exist, stop here
+  if (!productCard) return;
+
+  // Switch off the "Quantity Display" button
+  const addToCartBtn = productCard.querySelector(`.add-to-cart-btn`);
+  const quantityBtn = productCard.querySelector(`.quantity-btn`);
+
+  // addToCartBtn.classList.remove(`hidden`);
+  quantityBtn.classList.add(`hidden`);
+  addToCartBtn.classList.remove(`hidden`);
+};
+
 // Function to delete a product from the Cart Element
 export const removeFromCart = (productId) => {
   // Checking if the product is in the Cart, using ".find()" Array method for REFERENCE
@@ -173,8 +190,17 @@ export const removeFromCart = (productId) => {
 
     // "updateCardBorder" function for the product's image border
     updateCardBorder(Number(productId));
+
+    // "productCardBtnSwitch" function for product's card buttons switch
+    productCardBtnSwitch(Number(productId));
   }
 
   // "cartState" has changed, so render the Cart Element again
   renderCart();
+};
+
+// Function that extract the product's quantity from the Cart
+// This function allow "product.js" to read a product quantity directly from the "cartState.items" Array
+export const arrayProductReference = (productId) => {
+  return cartState.items.find((item) => item.id === Number(productId));
 };
