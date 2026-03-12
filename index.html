@@ -11,46 +11,46 @@
   </head>
 
   <body
-    class="relative flex flex-col gap-10 px-5 py-6 h-dvh w-dvw font-redhat bg-rose-50"
+    class="font-redhat relative flex h-dvh w-dvw flex-col gap-10 bg-rose-50 px-5 py-6"
   >
     <!-- HEADER -->
     <header>
-      <h1 class="font-bold text-4xl">Desserts</h1>
+      <h1 class="text-4xl font-bold">Desserts</h1>
     </header>
 
     <!-- MAIN -->
     <main>
       <!-- Product Grid List -->
-      <section id="product-grid" class="grid grid-cols-1 gap-5 mb-10"></section>
+      <section id="product-grid" class="mb-10 grid grid-cols-1 gap-5"></section>
 
       <!-- Cart -->
       <aside
-        class="flex flex-col gap-5 items-center justify-center w-full h-auto mb-10 bg-white rounded-xl px-5 py-6"
+        class="mb-10 flex h-auto w-full flex-col items-center justify-center gap-5 rounded-xl bg-white px-5 py-6"
       >
         <!-- Cart Header -->
         <header class="self-start">
-          <h2 class="font-bold text-2xl text-rose-900">
+          <h2 class="text-2xl font-bold text-rose-900">
             Your Cart (<span id="cart-count">0</span>)
           </h2>
         </header>
 
         <!-- Cart Selected Items Unordered List (where JS will inject the list items) -->
         <main>
-          <ul id="cart-items" class="w-full flex flex-col"></ul>
+          <ul id="cart-items" class="flex w-full flex-col"></ul>
         </main>
 
         <!-- Cart Footer (with Total + Confirmation Button) -->
-        <footer id="cart-footer" class="size-full mt-5">
+        <footer id="cart-footer" class="mt-5 size-full">
           <div class="flex flex-col gap-8">
             <!-- Cart Footer Total -->
             <div class="flex items-center justify-between">
               <p class="text-[0.9rem]">Order Total</p>
-              <p id="cart-total" class="font-bold text-2xl">$0.00</p>
+              <p id="cart-total" class="text-2xl font-bold">$0.00</p>
             </div>
 
             <!-- Cart Footer message -->
             <div
-              class="flex gap-2 items-center self-center bg-rose-50 px-7 py-3 rounded-xl"
+              class="flex items-center gap-2 self-center rounded-xl bg-rose-50 px-7 py-3"
             >
               <img id="carbon-neutral-icon" alt="carbon-neutral" />
               <p class="text-[0.9rem]">
@@ -62,7 +62,7 @@
             <!-- Cart Footer Confirmation Button -->
             <button
               id="cart-confirm-button"
-              class="bg-red-800/90 text-white font-semibold text-[0.91rem] rounded-full py-3"
+              class="rounded-full bg-red-800/90 py-3 text-[0.91rem] font-semibold text-white"
             >
               Confirm Order
             </button>
@@ -74,13 +74,13 @@
     <!-- Overlay -->
     <div
       id="overlay"
-      class="hidden fixed z-10 top-0 left-0 h-dvh w-dvw bg-black opacity-50"
+      class="fixed top-0 left-0 z-10 hidden h-dvh w-dvw bg-black opacity-50"
     ></div>
 
     <!-- Confirmation Modal Window -->
     <section
       id="modal-window"
-      class="hidden fixed z-20 bottom-0 left-0 bg-white w-dvw h-[90dvh] rounded-t-xl px-5 py-6"
+      class="fixed bottom-0 left-0 z-20 hidden h-[90dvh] w-dvw rounded-t-xl bg-white px-5 py-6"
     >
       <div class="flex flex-col items-center justify-between gap-7">
         <header class="flex flex-col items-center gap-4">
@@ -89,18 +89,18 @@
             class="size-10"
             alt="Order Confirmed Icon"
           />
-          <h2 class="font-bold text-4xl">Order Confirmed!</h2>
+          <h2 class="text-4xl font-bold">Order Confirmed!</h2>
           <p
-            class="font-semibold italic text-[0.9rem] text-rose-950 opacity-40"
+            class="text-[0.9rem] font-semibold text-rose-950 italic opacity-40"
           >
             We hope you enjoy your food!
           </p>
         </header>
 
-        <div class="bg-rose-50 w-[85dvw] p-5 rounded-xl">
+        <div class="w-[85dvw] rounded-xl bg-rose-50 p-5">
           <ul id="modal-items" class="max-h-[32dvh] overflow-y-scroll"></ul>
 
-          <div class="flex items-center justify-between font-semibold mt-5">
+          <div class="mt-5 flex items-center justify-between font-semibold">
             <span class="text-[0.9rem]">Order Total</span>
             <span id="modal-total" class="text-[1.5rem] font-bold">$0.00</span>
           </div>
@@ -109,7 +109,7 @@
         <footer>
           <button
             id="start-new-order-button"
-            class="bg-red-800/90 text-white font-semibold text-[0.91rem] py-3 px-26.5 rounded-full"
+            class="rounded-full bg-red-800/90 px-26.5 py-3 text-[0.91rem] font-semibold text-white"
           >
             Start New Order
           </button>
