@@ -7,7 +7,7 @@ export const icons = import.meta.glob(`/src/assets/icons/*.svg`, {
 });
 
 // Import IMAGES from "src" folder
-export const images = import.meta.glob(`/src/assets/images/image-*.jpg`, {
+export const images = import.meta.glob(`/src/assets/images/*.jpg`, {
   eager: true,
   import: `default`,
 });

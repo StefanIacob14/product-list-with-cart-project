@@ -53,7 +53,7 @@ export const createProductCard = (product) => {
                 />
             </button>
 
-            <span class="quantity-display text-white">1</span>
+            <span class="quantity-display text-white"></span>
 
             <button
               class="increment-quantity-btn border border-white rounded-full p-1">
@@ -77,13 +77,23 @@ export const createProductCard = (product) => {
   const addToCartBtn = article.querySelector(`.add-to-cart-btn`);
   const quantityBtn = article.querySelector(`.quantity-btn`);
 
+  // Select the "Quantity Display" button's HTML elements
+  const decrementBtn = article.querySelector(`.decrement-quantity-btn`);
+  const quantityDisplay = article.querySelector(`.quantity-display`);
+  const incrementBtn = article.querySelector(`.increment-quantity-btn`);
+
   addToCartBtn.addEventListener(`click`, () => {
+    // "add-to-cart" button's function that insert a new object in the "cartState" array
     addToCart({
       id: product.id,
       name: product.name,
       price: product.price,
       image: images[product.image.thumbnail],
     });
+
+    // Display the desire product's quantity for the Cart
+    const existingItem = arrayProductReference(product.id);
+    quantityDisplay.textContent = existingItem.quantity;
 
     // Selected product's image has a border, indicates that is in the Cart
     article
@@ -99,11 +109,6 @@ export const createProductCard = (product) => {
   });
 
   // Add "Quantity Display" button's Event Listener, after setting innerHTML
-  // Select the "Quantity Display" button's HTML elements
-  const decrementBtn = article.querySelector(`.decrement-quantity-btn`);
-  const quantityDisplay = article.querySelector(`.quantity-display`);
-  const incrementBtn = article.querySelector(`.increment-quantity-btn`);
-
   // Increment button Event Listener + quantity display
   incrementBtn.addEventListener(`click`, () => {
     addToCart({
@@ -113,6 +118,7 @@ export const createProductCard = (product) => {
       image: images[product.image.thumbnail],
     });
 
+    // Display the Cart product's quantity, after clicking the increment button
     const currentItem = arrayProductReference(product.id);
     quantityDisplay.textContent = currentItem.quantity;
   });
@@ -121,6 +127,7 @@ export const createProductCard = (product) => {
   decrementBtn.addEventListener(`click`, () => {
     removeFromCart(product.id);
 
+    // Display the Cart product's quantity, after clicking the decrement button
     const currentItem = arrayProductReference(product.id);
     quantityDisplay.textContent = currentItem.quantity;
   });

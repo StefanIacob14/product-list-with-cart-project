@@ -22,11 +22,8 @@ const resetOrder = () => {
   // Clear the "cartState" variable
   cartState.items = [];
 
-  // Rebuild the empty Cart element UI
-  renderCart();
-
-  // Hide the Modal Window
-  modalWindowState();
+  // Quickly reload the webpage state, using the "window.location.reload()"
+  window.location.reload();
 };
 
 // Display the Confirmation Modal Window, after the user press the "Confirm Order" button
@@ -50,7 +47,7 @@ export const modalWindow = () => {
       (item) => `
     <li class="flex items-center gap-4 py-3 border-b-2 border-b-red-100/70">
       <img
-        src="${images[item.image]}"
+        src="${images[item.image.mobile]}"
         alt="${item.name}"
         class="size-12 rounded-xl object-cover"
       />
