@@ -1,7 +1,7 @@
 "use strict";
 
 import { icons, images } from "/src/js/assets.js";
-import { cartState, renderCart } from "/src/js/cart.js";
+import { cartState } from "/src/js/cart.js";
 
 // Modal Confirmation Icon
 document.getElementById(`icon-order-confirmed`).src =
@@ -47,7 +47,7 @@ export const modalWindow = () => {
       (item) => `
     <li class="flex items-center gap-4 py-3 border-b-2 border-b-red-100/70">
       <img
-        src="${images[item.image.mobile]}"
+        src="${item.image}"
         alt="${item.name}"
         class="size-12 rounded-xl object-cover"
       />

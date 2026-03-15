@@ -64,7 +64,7 @@ export const renderCart = () => {
       <li class="flex items-center justify-between gap-7 py-3 border-b-2 border-b-red-100/70">
         <div class="flex gap-5">
           <img
-            src="${images[item.image.mobile]}"
+            src="${item.image}"
             alt="${item.name}"
             class="size-12 rounded-xl"
           />
