@@ -147,7 +147,14 @@ export const createProductCard = (product) => {
 
     // Display the Cart product's quantity, after clicking the decrement button
     const currentItem = arrayProductReference(product.id);
-    quantityDisplay.textContent = currentItem.quantity;
+
+    // The "null" Guard - for the last item in the Cart that is completely erased
+    // Because the "arrayProductReference" cannot find any Reference in the "cartState.items" array, it will return "null"
+    // This "null" result will break the code, and an error will appear in the Console
+    if (currentItem) {
+      // If the item still exist in the Cart, update the quantity display
+      quantityDisplay.textContent = currentItem.quantity;
+    }
   });
 
   return article;
