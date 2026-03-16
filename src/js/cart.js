@@ -47,9 +47,9 @@ export const renderCart = () => {
       <img
         src="${icons[`/src/assets/icons/illustration-empty-cart.svg`]}"
         alt="Empty Cart"
-        class="size-35 mt-5 self-center"
+        class="size-35 mt-5 self-center md:size-50"
       />
-      <li class="text-center text-[0.9rem] text-red-950/50 font-semibold py-5">
+      <li class="text-center text-[0.9rem] text-red-950/50 font-semibold py-5 md:text-2xl">
         Your added items will appear here
       </li>
     `;
@@ -61,26 +61,26 @@ export const renderCart = () => {
       .map(
         (item) => `
       <li class="flex items-center justify-between gap-7 py-3 border-b-2 border-b-red-100/70">
-        <div class="flex gap-5">
+        <div class="flex gap-5 md:gap-8">
           <img
             src="${item.image}"
             alt="${item.name}"
-            class="size-12 rounded-xl"
+            class="size-12 rounded-xl md:size-20"
           />
           <div>
-            <p class="font-semibold text-sm">${item.name}</p>
-            <p class="text-sm text-gray-400 mt-1">
+            <p class="font-semibold text-sm md:text-2xl">${item.name}</p>
+            <p class="text-sm text-gray-400 mt-1 md:text-2xl md:mt-2">
               <span class="text-red-600 font-bold">${item.quantity}x</span>
-              <span class="mx-2">$${item.price.toFixed(2)}</span>
+              <span class="mx-2 md:mx-3">$${item.price.toFixed(2)}</span>
               <span class="font-semibold text-gray-700">
                 $${(item.price * item.quantity).toFixed(2)}
               </span>
             </p>
           </div>
         </div>
-        <button class="remove-btn w-5 h-5 rounded-full border-2 border-gray-400
-        text-gray-400 hover:border-red-600 hover:text-red-600 flex items-start
-        justify-center text-xs font-bold transition-colors" data-id="${item.id}"
+        <button class="remove-btn size-5 rounded-full border-2 border-gray-400
+        text-gray-400 hover:border-red-600 hover:text-red-600 flex items-center
+        justify-center text-xs font-bold transition-colors md:text-base md:size-6" data-id="${item.id}"
         aria-label="Remove ${item.name}">x</button>
       </li>`,
       )

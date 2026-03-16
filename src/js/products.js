@@ -40,7 +40,7 @@ export const createProductCard = (product) => {
           id="product-card-image"
           src="${images[product.image.mobile]}"
           alt="${product.name}"
-          class="size-full rounded-xl border-2 border-transparent"
+          class="size-full rounded-xl border-2 border-transparent md:border-4"
         />
       </picture>
 
@@ -48,11 +48,13 @@ export const createProductCard = (product) => {
         class="add-to-cart-btn absolute bottom-0 left-1/2 -translate-x-1/2
         translate-y-1/2 bg-white border border-red-600
         text-sm font-semibold px-5 py-2 rounded-full hover:text-red-600
+        md:text-2xl
         ">
           <div class="flex items-center gap-2">
             <img
               src="${icons[`/src/assets/icons/icon-add-to-cart.svg`]}"
               alt="Add to Cart"
+              class="md:size-7"
             />
             <span>Add to Cart</span>
           </div>
@@ -61,20 +63,20 @@ export const createProductCard = (product) => {
       <div
         class="quantity-btn hidden absolute bottom-0 left-1/2 -translate-x-1/2
         translate-y-1/2 bg-red-800 text-sm font-semibold
-        px-5 py-2 rounded-full">
-          <div class="flex items-center gap-7.5">
+        px-5 py-2 rounded-full text-white md:text-2xl">
+          <div class="flex items-center gap-7.5 md:gap-15">
             <button
-              class="decrement-quantity-btn border border-white rounded-full p-1 py-2">
+              class="decrement-quantity-btn border border-white rounded-full p-1 py-2 md:size-5">
                 <img
                   src="${icons[`/src/assets/icons/icon-decrement-quantity.svg`]}"
                   alt="Decrease ${product.name} quantity"
                 />
             </button>
 
-            <span class="quantity-display text-white"></span>
+            <span class="quantity-display"></span>
 
             <button
-              class="increment-quantity-btn border border-white rounded-full p-1">
+              class="increment-quantity-btn border border-white rounded-full p-1 md:size-5">
                 <img
                   src="${icons[`/src/assets/icons/icon-increment-quantity.svg`]}"
                   alt="Increase ${product.name} quantity"
@@ -84,10 +86,10 @@ export const createProductCard = (product) => {
       </div>
     </div>
 
-    <div class="flex flex-col gap-1 my-8">
-      <p class="text-sm text-gray-400">${product.category}</p>
-      <h3 class="font-bold text-gray-800">${product.name}</h3>
-      <p class="text-red-700 font-semibold">$${product.price.toFixed(2)}</p>
+    <div class="flex flex-col gap-1 my-8 md:gap-3 md:my-11.5">
+      <p class="text-sm text-gray-400 md:text-lg">${product.category}</p>
+      <h3 class="font-bold text-gray-800 md:text-2xl">${product.name}</h3>
+      <p class="text-red-700 font-semibold md:text-2xl">$${product.price.toFixed(2)}</p>
     </div>
   `;
 
