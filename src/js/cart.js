@@ -43,12 +43,11 @@ export const renderCart = () => {
   // Dynamically Populate the "cartItemsEl" variable
   if (cartState.items.length === 0) {
     // If the "items" Array doesn't have any product, Cart UI will show just an image and a message
-    cartItemsEl.className = `justify-self-center`;
     cartItemsEl.innerHTML = `
       <img
         src="${icons[`/src/assets/icons/illustration-empty-cart.svg`]}"
         alt="Empty Cart"
-        class="justify-self-center mt-5"
+        class="size-35 mt-5 self-center"
       />
       <li class="text-center text-[0.9rem] text-red-950/50 font-semibold py-5">
         Your added items will appear here

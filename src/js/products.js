@@ -19,12 +19,30 @@ export const createProductCard = (product) => {
   // Using ".innerHTML" with template literals for writing strings cleanly
   article.innerHTML = `
     <div class="relative">
-      <img
-        id="product-card-image"
-        src="${images[product.image.mobile]}"
-        alt="${product.name}"
-        class="size-full rounded-xl border-2 border-transparent"
-      />
+
+      <!-- Responsive Product Image, using "<picture></picture> HTML element -->
+      <!-- Tells the browser which image to download, before it downloads anything -->
+      <picture>
+        <!-- Desktop - 1024px and above -->
+        <source
+          media ="(min-width: 1024px)"
+          srcset="${images[product.image.desktop]}"
+        />
+
+        <!-- Tablet - 640px and above -->
+        <source
+          media="(min-width: 640px)"
+          srcset="${images[product.image.tablet]}"
+        />
+
+        <!-- Mobile - default, no media query needed -->
+        <img
+          id="product-card-image"
+          src="${images[product.image.mobile]}"
+          alt="${product.name}"
+          class="size-full rounded-xl border-2 border-transparent"
+        />
+      </picture>
 
       <button
         class="add-to-cart-btn absolute bottom-0 left-1/2 -translate-x-1/2
