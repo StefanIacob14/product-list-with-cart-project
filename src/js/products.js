@@ -48,13 +48,13 @@ export const createProductCard = (product) => {
         class="add-to-cart-btn absolute bottom-0 left-1/2 -translate-x-1/2
         translate-y-1/2 bg-white border border-red-600
         text-sm font-semibold px-5 py-2 rounded-full hover:text-red-600
-        md:text-2xl
+        md:text-3xl md:py-5 md:px-8
         ">
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-2 md:gap-4">
             <img
               src="${icons[`/src/assets/icons/icon-add-to-cart.svg`]}"
               alt="Add to Cart"
-              class="md:size-7"
+              class="md:size-10"
             />
             <span>Add to Cart</span>
           </div>
@@ -63,33 +63,35 @@ export const createProductCard = (product) => {
       <div
         class="quantity-btn hidden absolute bottom-0 left-1/2 -translate-x-1/2
         translate-y-1/2 bg-red-800 text-sm font-semibold
-        px-5 py-2 rounded-full text-white md:text-2xl">
-          <div class="flex items-center gap-7.5 md:gap-15">
+        px-5 py-2 rounded-full text-white md:text-3xl md:py-5 md:px-8">
+          <div class="flex items-center gap-7.5 md:gap-17">
             <button
-              class="decrement-quantity-btn border border-white rounded-full p-1 py-2 md:size-5">
+              class="decrement-quantity-btn border border-white rounded-full flex items-center justify-center md:size-10 md:border-2">
                 <img
                   src="${icons[`/src/assets/icons/icon-decrement-quantity.svg`]}"
                   alt="Decrease ${product.name} quantity"
+                  class="md:size-4"
                 />
             </button>
 
-            <span class="quantity-display"></span>
+            <span class="quantity-display md:text-4xl"></span>
 
             <button
-              class="increment-quantity-btn border border-white rounded-full p-1 md:size-5">
+              class="increment-quantity-btn border border-white rounded-full flex items-center justify-center md:size-10 md:border-2">
                 <img
                   src="${icons[`/src/assets/icons/icon-increment-quantity.svg`]}"
                   alt="Increase ${product.name} quantity"
+                  class="md:size-4"
                 />
             </button>
           </div>
       </div>
     </div>
 
-    <div class="flex flex-col gap-1 my-8 md:gap-3 md:my-11.5">
-      <p class="text-sm text-gray-400 md:text-lg">${product.category}</p>
-      <h3 class="font-bold text-gray-800 md:text-2xl">${product.name}</h3>
-      <p class="text-red-700 font-semibold md:text-2xl">$${product.price.toFixed(2)}</p>
+    <div class="flex flex-col gap-1 my-8 md:gap-4 md:my-14">
+      <p class="text-sm text-gray-400 md:text-[1.4rem]">${product.category}</p>
+      <h3 class="font-bold text-gray-800 md:text-3xl">${product.name}</h3>
+      <p class="text-red-700 font-semibold md:text-3xl">$${product.price.toFixed(2)}</p>
     </div>
   `;
 

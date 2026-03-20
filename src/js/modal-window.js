@@ -1,6 +1,6 @@
 "use strict";
 
-import { icons, images } from "/src/js/assets.js";
+import { icons } from "/src/js/assets.js";
 import { cartState } from "/src/js/cart.js";
 
 // Modal Confirmation Icon
@@ -45,20 +45,20 @@ export const modalWindow = () => {
   modalItemsEl.innerHTML = cartState.items
     .map(
       (item) => `
-    <li class="flex items-center gap-4 py-3 border-b-2 border-b-red-100/70">
+    <li class="flex items-center gap-4 py-3 border-b-2 border-b-red-100/70 md:gap-10 md:py-5">
       <img
         src="${item.image}"
         alt="${item.name}"
-        class="size-12 rounded-xl object-cover"
+        class="size-12 rounded-xl object-cover md:size-20"
       />
       <div class="flex-1">
-        <p class="font-semibold text-sm">${item.name}</p>
-        <p class="text-sm text-gray-400">
+        <p class="font-semibold text-sm md:text-2xl md:mb-2">${item.name}</p>
+        <p class="text-sm text-gray-400 md:text-2xl">
           <span class="text-red-600 font-semibold">${item.quantity}x</span>
           <span class="ml-6">$${item.price.toFixed(2)}</span>
         </p>
       </div>
-      <p class="font-semibold">$${(item.price * item.quantity).toFixed(2)}</p>
+      <p class="font-semibold md:text-2xl">$${(item.price * item.quantity).toFixed(2)}</p>
     </li>`,
     )
     .join("");
