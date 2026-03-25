@@ -47,9 +47,9 @@ export const renderCart = () => {
       <img
         src="${icons[`/src/assets/icons/illustration-empty-cart.svg`]}"
         alt="Empty Cart"
-        class="size-35 self-center md:size-50"
+        class="size-35 self-center md:size-50 lg:size-40"
       />
-      <li class="text-center text-[0.9rem] text-red-950/50 font-semibold py-5 md:text-2xl">
+      <li class="text-center text-[0.9rem] text-red-950/50 font-semibold py-5 md:text-2xl lg:text-xl">
         Your added items will appear here
       </li>
     `;
