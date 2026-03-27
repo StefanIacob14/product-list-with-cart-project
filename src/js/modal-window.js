@@ -45,11 +45,12 @@ export const modalWindow = () => {
   modalItemsEl.innerHTML = cartState.items
     .map(
       (item) => `
-    <li class="flex items-center gap-4 py-3 border-b-2 border-b-red-100/70 md:gap-10 md:py-5">
+    <li class="flex items-center gap-4 py-3 border-b-2 border-b-red-100/70
+    pointer-events-none md:gap-10 md:py-5 lg:gap-6">
       <img
         src="${item.image}"
         alt="${item.name}"
-        class="size-12 rounded-xl object-cover md:size-20"
+        class="size-12 rounded-xl object-cover md:size-20 lg:size-18"
       />
       <div class="flex-1">
         <p class="font-semibold text-sm md:text-2xl md:mb-2">${item.name}</p>
@@ -58,7 +59,7 @@ export const modalWindow = () => {
           <span class="ml-6">$${item.price.toFixed(2)}</span>
         </p>
       </div>
-      <p class="font-semibold md:text-2xl">$${(item.price * item.quantity).toFixed(2)}</p>
+      <p class="font-semibold mr-2 md:text-2xl">$${(item.price * item.quantity).toFixed(2)}</p>
     </li>`,
     )
     .join("");

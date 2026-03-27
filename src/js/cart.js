@@ -1,7 +1,7 @@
 "use strict";
 
 // Import the other modules
-import { icons, images } from "/src/js/assets.js";
+import { icons } from "/src/js/assets.js";
 import { CARD_DEFAULT_BORDER, CARD_ACTIVE_BORDER } from "/src/js/constants.js";
 import { modalWindow } from "/src/js/modal-window.js";
 
@@ -49,7 +49,8 @@ export const renderCart = () => {
         alt="Empty Cart"
         class="size-35 self-center md:size-50 lg:size-40"
       />
-      <li class="text-center text-[0.9rem] text-red-950/50 font-semibold py-5 md:text-2xl lg:text-xl">
+      <li class="text-center text-[0.9rem] text-red-950/50 font-semibold
+      py-5 pointer-events-none md:text-2xl lg:text-xl">
         Your added items will appear here
       </li>
     `;
@@ -65,11 +66,11 @@ export const renderCart = () => {
           <img
             src="${item.image}"
             alt="${item.name}"
-            class="size-12 rounded-xl md:size-23"
+            class="size-12 rounded-xl md:size-23 lg:size-18"
           />
-          <div>
-            <p class="font-semibold text-sm md:text-3xl">${item.name}</p>
-            <p class="text-sm text-gray-400 mt-1 md:text-3xl md:mt-2">
+          <div class="pointer-events-none">
+            <p class="font-semibold text-sm md:text-3xl lg:text-2xl">${item.name}</p>
+            <p class="text-sm text-gray-400 mt-1 md:text-3xl md:mt-2 lg:text-2xl">
               <span class="text-red-600 font-bold">${item.quantity}x</span>
               <span class="mx-2 md:mx-3">$${item.price.toFixed(2)}</span>
               <span class="font-semibold text-gray-700">
@@ -80,8 +81,8 @@ export const renderCart = () => {
         </div>
         <button class="remove-btn size-5 rounded-full border-2 border-gray-400
         text-gray-400 hover:border-red-600 hover:text-red-600 flex items-center
-        justify-center text-xs font-bold transition-colors md:text-lg md:size-8" data-id="${item.id}"
-        aria-label="Remove ${item.name}">x</button>
+        justify-center text-xs font-bold cursor-pointer transition-all duration-200
+        md:text-lg md:size-8 lg:size-7 lg:text-base" data-id="${item.id}" aria-label="Remove ${item.name}">x</button>
       </li>`,
       )
       .join("");

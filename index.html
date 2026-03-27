@@ -15,7 +15,11 @@
   >
     <!-- HEADER -->
     <header>
-      <h1 class="text-4xl font-bold md:text-6xl lg:text-5xl">Desserts</h1>
+      <h1
+        class="pointer-events-none text-4xl font-bold md:text-6xl lg:mt-3 lg:text-5xl"
+      >
+        Desserts
+      </h1>
     </header>
 
     <!-- MAIN -->
@@ -32,7 +36,7 @@
       class="mb-10 flex h-auto w-full flex-col items-center justify-center gap-5 rounded-xl bg-white px-5 py-6 md:gap-12 md:px-10 md:py-8 lg:col-start-3 lg:row-start-1 lg:row-end-12 lg:self-start"
     >
       <!-- Cart Header -->
-      <header class="self-start">
+      <header class="pointer-events-none self-start">
         <h2
           class="mb-5 text-2xl font-bold text-rose-900 md:text-[2.65rem] lg:text-3xl"
         >
@@ -49,30 +53,40 @@
       <footer id="cart-footer" class="mt-5 size-full">
         <div class="flex flex-col gap-8">
           <!-- Cart Footer Total -->
-          <div class="flex items-center justify-between md:mb-5">
-            <p class="text-[0.9rem] md:text-2xl">Order Total</p>
-            <p id="cart-total" class="text-2xl font-bold md:text-5xl">$0.00</p>
+          <div
+            class="pointer-events-none flex items-center justify-between md:mb-5 lg:justify-around"
+          >
+            <p class="text-[0.9rem] md:text-2xl lg:text-xl lg:font-semibold">
+              Order Total
+            </p>
+            <p
+              id="cart-total"
+              class="text-2xl font-bold md:text-5xl lg:text-4xl"
+            >
+              $0.00
+            </p>
           </div>
 
           <!-- Cart Footer message -->
           <div
-            class="flex items-center gap-2 self-center rounded-xl bg-rose-50 px-7 py-3 md:mb-5"
+            class="flex items-center gap-2 self-center rounded-xl bg-rose-50 px-7 py-3 md:mb-5 lg:px-9"
           >
             <img
               id="carbon-neutral-icon"
               alt="carbon-neutral"
-              class="md:size-9"
+              class="md:size-9 lg:size-7"
             />
-            <p class="text-[0.9rem] md:text-2xl">
+            <p class="pointer-events-none text-[0.9rem] md:text-2xl lg:text-xl">
               This is a
-              <span class="font-semibold">carbon-neutral</span> delivery
+              <span class="font-semibold">carbon-neutral</span>
+              delivery
             </p>
           </div>
 
           <!-- Cart Footer Confirmation Button -->
           <button
             id="cart-confirm-button"
-            class="rounded-full bg-red-800/90 py-3 text-[0.91rem] font-semibold text-white md:py-5 md:text-3xl"
+            class="cursor-pointer rounded-full bg-red-800/90 py-3 text-[0.91rem] font-semibold text-white transition-all duration-200 hover:bg-red-700 md:py-5 md:text-3xl lg:text-2xl"
           >
             Confirm Order
           </button>
@@ -83,37 +97,45 @@
     <!-- Overlay -->
     <div
       id="overlay"
-      class="fixed top-0 left-0 z-10 hidden h-dvh w-dvw bg-black opacity-50"
+      class="fixed top-0 left-0 z-10 hidden h-dvh w-dvw bg-black opacity-70"
     ></div>
 
     <!-- Confirmation Modal Window -->
     <section
       id="modal-window"
-      class="fixed bottom-0 left-0 z-20 hidden h-[90dvh] w-dvw rounded-t-xl bg-white px-5 py-6 md:py-12"
+      class="fixed bottom-0 left-0 z-20 hidden h-[90dvh] w-dvw rounded-t-xl bg-white px-5 py-6 md:py-12 lg:bottom-1/2 lg:left-1/2 lg:h-[86dvh] lg:w-[35dvw] lg:-translate-x-1/2 lg:translate-y-1/2 lg:rounded-b-xl"
     >
       <div class="flex flex-col items-center justify-between gap-7 md:gap-10">
-        <header class="flex flex-col items-center gap-4 md:gap-6">
+        <header
+          class="pointer-events-none flex flex-col items-center gap-4 md:gap-6"
+        >
           <img
             id="icon-order-confirmed"
-            class="size-10 md:size-15"
+            class="size-10 md:size-15 lg:size-12"
             alt="Order Confirmed Icon"
           />
-          <h2 class="text-4xl font-bold md:text-6xl">Order Confirmed!</h2>
+          <h2 class="text-4xl font-bold md:text-6xl lg:text-5xl">
+            Order Confirmed!
+          </h2>
           <p
-            class="text-[0.9rem] font-semibold text-rose-950 italic opacity-40 md:text-2xl"
+            class="text-[0.9rem] font-semibold text-rose-950 italic opacity-40 md:text-2xl lg:text-xl"
           >
             We hope you enjoy your food!
           </p>
         </header>
 
-        <div class="w-[85dvw] rounded-xl bg-rose-50 p-5">
+        <div class="w-[85dvw] rounded-xl bg-rose-50 p-5 lg:w-[30dvw]">
           <ul id="modal-items" class="max-h-[32dvh] overflow-y-scroll"></ul>
 
           <div
-            class="mt-5 flex items-center justify-between font-semibold md:mt-10"
+            class="pointer-events-none mt-5 flex items-center justify-between font-semibold md:mt-10 lg:mt-12"
           >
-            <span class="text-[0.9rem] md:text-3xl">Order Total</span>
-            <span id="modal-total" class="text-[1.5rem] font-bold md:text-5xl"
+            <span class="text-[0.9rem] md:text-3xl lg:text-2xl"
+              >Order Total</span
+            >
+            <span
+              id="modal-total"
+              class="text-[1.5rem] font-bold md:text-5xl lg:text-4xl"
               >$0.00</span
             >
           </div>
@@ -122,7 +144,7 @@
         <footer>
           <button
             id="start-new-order-button"
-            class="rounded-full bg-red-800/90 px-26.5 py-3 text-[0.91rem] font-semibold text-white md:px-53 md:py-5 md:text-3xl"
+            class="cursor-pointer rounded-full bg-red-800/90 px-26.5 py-3 text-[0.91rem] font-semibold text-white transition-all duration-200 hover:bg-red-700 md:px-53 md:py-5 md:text-3xl lg:mt-5 lg:text-2xl"
           >
             Start New Order
           </button>

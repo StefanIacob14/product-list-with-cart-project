@@ -19,7 +19,6 @@ export const createProductCard = (product) => {
   // Using ".innerHTML" with template literals for writing strings cleanly
   article.innerHTML = `
     <div class="relative">
-
       <!-- Responsive Product Image, using "<picture></picture> HTML element -->
       <!-- Tells the browser which image to download, before it downloads anything -->
       <picture>
@@ -45,16 +44,18 @@ export const createProductCard = (product) => {
       </picture>
 
       <button
-        class="add-to-cart-btn absolute bottom-0 left-1/2 -translate-x-1/2
+        class="add-to-cart-btn group/button absolute bottom-0 left-1/2 -translate-x-1/2
         translate-y-1/2 bg-white border border-red-600
-        text-sm font-semibold px-5 py-2 rounded-full hover:text-red-600
+        text-sm font-semibold px-5 py-2 rounded-full hover:text-white hover:border-red-800
+        hover:bg-red-800 transition-all duration-200 cursor-pointer
         md:text-3xl md:py-5 md:px-8 lg:text-xl lg:px-5 lg:py-3
         ">
           <div class="flex items-center gap-2 md:gap-4 lg:gap-3">
             <img
               src="${icons[`/src/assets/icons/icon-add-to-cart.svg`]}"
               alt="Add to Cart"
-              class="md:size-10 lg:size-7"
+              class="md:size-10 lg:size-7 group-hover/button:brightness-1000
+              transition-all duration-200"
             />
             <span>Add to Cart</span>
           </div>
@@ -68,7 +69,7 @@ export const createProductCard = (product) => {
           <div class="flex items-center gap-7.5 md:gap-17 lg:gap-11">
             <button
               class="decrement-quantity-btn border border-white rounded-full flex
-              items-center justify-center md:size-10 md:border-2 lg:size-7">
+              items-center justify-center cursor-pointer md:size-10 md:border-2 lg:size-7">
                 <img
                   src="${icons[`/src/assets/icons/icon-decrement-quantity.svg`]}"
                   alt="Decrease ${product.name} quantity"
@@ -76,11 +77,11 @@ export const createProductCard = (product) => {
                 />
             </button>
 
-            <span class="quantity-display md:text-4xl lg:text-xl"></span>
+            <span class="quantity-display md:text-4xl lg:text-xl pointer-events-none"></span>
 
             <button
               class="increment-quantity-btn border border-white rounded-full flex
-              items-center justify-center md:size-10 md:border-2 lg:size-7">
+              items-center justify-center cursor-pointer md:size-10 md:border-2 lg:size-7">
                 <img
                   src="${icons[`/src/assets/icons/icon-increment-quantity.svg`]}"
                   alt="Increase ${product.name} quantity"
@@ -91,7 +92,7 @@ export const createProductCard = (product) => {
       </div>
     </div>
 
-    <div class="flex flex-col gap-1 my-8 md:gap-4 md:my-14 lg:my-10 lg:gap-2">
+    <div class="flex flex-col gap-1 my-8 pointer-events-none md:gap-4 md:my-14 lg:my-10 lg:gap-2">
       <p class="text-sm text-gray-400 md:text-[1.4rem] lg:text-lg">${product.category}</p>
       <h3 class="font-bold text-gray-800 md:text-3xl lg:text-xl">${product.name}</h3>
       <p class="text-red-700 font-semibold md:text-3xl lg:text-xl">$${product.price.toFixed(2)}</p>
@@ -156,7 +157,8 @@ export const createProductCard = (product) => {
     const currentItem = arrayProductReference(product.id);
 
     // The "null" Guard - for the last item in the Cart that is completely erased
-    // Because the "arrayProductReference" cannot find any Reference in the "cartState.items" array, it will return "null"
+    // Because the "arrayProductReference" cannot find any Reference in the
+    // "cartState.items" array, it will return "null"
     // This "null" result will break the code, and an error will appear in the Console
     if (currentItem) {
       // If the item still exist in the Cart, update the quantity display
